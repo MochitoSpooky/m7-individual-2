@@ -1,0 +1,75 @@
+/* Estilos CSS personalizados */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+/*imagen de fondo*/
+body {
+    background-image: url("../img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.content {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.content img {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.content form {
+    margin-top: 20px;
+}
+
+.content .btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.content .btn:hover {
+    background-color: #45a049;
+}
+/*formato login*/
+.login-container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  

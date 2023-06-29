@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Reminder App</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="content">
+            {% block content %}
+            <h1>Bienvenido a My Reminder App</h1>
+            <img src="{% static 'img/nota.png' %}" alt="Logo">
+            <br>
+            <a href="{% url 'login' %}" class="btn">Iniciar sesión</a>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
