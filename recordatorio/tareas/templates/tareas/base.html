@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
-    <title>Reminder</title>
+    <title>My Reminder</title>
 </head>
 <body>
     <nav>
@@ -32,6 +32,41 @@
         </div>
     </nav>
     <main>
+        {% block logo %}
+        <div class="logo-container">
+            <table>
+                <tr>
+                  <th style="width:70%">My Reminder</th>
+                  <th>Pros</th>
+                </tr>
+                <tr>
+                  <td>Gestión eficiente de tareas</td>
+                  <td><i class="fa fa-check"></i></td>
+                </tr>
+                <tr>
+                  <td>Mayor productividad</td>
+                  <td><i class="fa fa-check"></i></td>
+                </tr>
+                <tr>
+                  <td>Recordatorios y notificaciones</td>
+                  <td><i class="fa fa-check"></i></td>
+                </tr>
+                <tr>
+                  <td>Colaboración en equipo</td>
+                  <td><i class="fa fa-check"></i></td>
+                </tr>
+                <tr>
+                  <td>Acceso desde cualquier lugar</td>
+                  <td><i class="fa fa-check"></i></td>
+                </tr>
+                <tr>
+                  <td>Seguimiento de progreso</td>
+                  <td><i class="fa fa-check"></i></td>
+                </tr>
+              </table>
+            <img src="{% static 'img/logo.png' %}" alt="Nombre de la Página" class="center">
+        </div>
+        {% endblock %}
         {% block content %}
         <!-- Contenido específico de cada página se colocará aquí -->
         {% endblock %}
