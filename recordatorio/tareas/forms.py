@@ -1,5 +1,9 @@
 from django import forms
+from .models import Tarea
 
-class LoginForm(forms.Form):
-    username = forms.CharField(label='Nombre de usuario')
-    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+class TareaForm(forms.ModelForm):
+    
+    class Meta:
+        model = Tarea
+        fields = ['titulo', 'descripcion', 'fecha_vencimiento', 'estado', 'etiqueta']
+        

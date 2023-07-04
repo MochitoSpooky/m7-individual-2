@@ -2,15 +2,40 @@
 {% block logo %}{% endblock %}
 
 {% block content %}
-  <h1>Tareas Pendientes</h1>
+  <h1>Detalle de Tarea</h1>
 
-  <ul>
-    {% for tarea in tareas_pendientes %}
-      <li>
-        <a href="{% url 'detalle_tarea' tarea.id %}">{{ tarea.titulo }}</a>
-      </li>
-    {% empty %}
-      <li>No hay tareas pendientes.</li>
-    {% endfor %}
-  </ul>
+  <table>
+    <tr>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Fecha de Vencimiento</th>
+      <th>Estado</th>
+      <th>Etiqueta</th>
+    </tr>
+    <tr>
+      <td>{{ tarea.titulo }}</td>
+      <td>{{ tarea.descripcion }}</td>
+      <td>{{ tarea.fecha_vencimiento }}</td>
+      <td>
+        <form method="POST">
+          {% csrf_token %}
+          <select name="estado">
+            {% for choice in tarea.ESTADO_CHOICES %}
+              <option value="{{ choice.0 }}" {% if choice.0 == tarea.estado %}selected{% endif %}>{{ choice.1 }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </td>
+      <td>
+        <form method="POST">
+          {% csrf_token %}
+          <select name="etiqueta">
+            {% for etiqueta in etiquetas %}
+              <option value="{{ etiqueta.id }}" {% if etiqueta.id == tarea.etiqueta.id %}selected{% endif %}>{{ etiqueta.nombre }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </td>
+    </tr>
+  </table>
 {% endblock %}

@@ -31,4 +31,6 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='tareas/base.html'), name='base'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('registro/', views.registro, name='registro'),
+    path("agregar/", views.agregar_tarea, name='agregar'),
+    path('detalle_tarea/<int:tarea_id>/', views.detalle_tarea, name='detalle_tarea'),
 ]
