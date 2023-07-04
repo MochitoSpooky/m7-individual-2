@@ -1,15 +1,34 @@
+"""
+URL configuration for recordatorio project.
 
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
 from django.contrib import admin
-from django.urls import path
-from tareas.views import CustomLoginView, base, bienvenido
-from tareas.views import base, bienvenido
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
-
+from tareas.views import bienvenida, CustomLogoutView
+from tareas import views
+from tareas.views import login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', CustomLoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='base'), name='logout'),
-    path('', base, name='base'),
-    path('bienvenido/', bienvenido, name='bienvenido'),
+    path('', views.home, name='base'),
+    path('login/', login_view, name='login'),
+    path('logout/', CustomLogoutView.as_view(next_page='base'), name='logout'),
+    path('tareas/', views.lista_tareas, name='tareas'),  # Cambiado a 'tareas' en lugar de 'lista_tareas'
+    path('bienvenida/', bienvenida, name='bienvenida'),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='tareas/base.html'), name='base'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('registro/', views.registro, name='registro'),
 ]
