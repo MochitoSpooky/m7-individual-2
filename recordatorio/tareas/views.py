@@ -62,6 +62,16 @@ def agregar_tarea(request):
     
     return render(request, 'tareas/agregar.html', {'form': form})
 
+
+@login_required
+def eliminar_tarea(request, tarea_id):
+    tarea = get_object_or_404(Tarea, id=tarea_id, usuario=request.user)
+    if request.method == 'POST':
+        tarea.delete()
+    return redirect('lista_tareas')
+
+
+
 class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
@@ -89,3 +99,4 @@ def registro(request):
             return render(request, 'tareas/registro.html', {'error_message': error_message})
     else:
         return render(request, 'tareas/registro.html')
+

@@ -33,4 +33,5 @@ urlpatterns = [
     path('registro/', views.registro, name='registro'),
     path("agregar/", views.agregar_tarea, name='agregar'),
     path('detalle_tarea/<int:tarea_id>/', views.detalle_tarea, name='detalle_tarea'),
+    path('tarea/<int:tarea_id>/eliminar/', views.eliminar_tarea, name='eliminar_tarea'),
 ]
