@@ -1,56 +1,83 @@
 {% extends 'tareas/base.html' %}
 
-{% block logo %}{% endblock %}
+{% block logo %}
+{% endblock %}
 
 {% block content %}
-  <h1>Detalle de Tarea</h1>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <div style="border: 1px solid black; padding: 20px; width: 300px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; margin-left: 20px;">
+      <h2>Perfil del Usuario</h2>
+      <p style="font-weight: bold;">Información del usuario:</p>
+      <p><strong>Nombre:</strong> {{ request.user.username|capfirst }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <!-- Agrega aquí más información del perfil del usuario si es necesario -->
+    </div>
+    <div style="text-align: center; flex: 1; margin-right: 20px; margin-left: 20px; margin-bottom: 20px;">
+      <h1>Detalle de Tarea</h1>
 
+      <div style="overflow-x: auto;">
+        <div style="max-width: 100%;">
+          <table class="table table-striped" style="width: 100%; margin-bottom: 40px;">
+            <thead>
+              <tr>
+                <th style="width: 20%;">Título</th>
+                <th style="width: 40%;">Descripción</th>
+                <th>Fecha de Vencimiento</th>
+                <th>Estado</th>
+                <th>Etiqueta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tarea in tareas %}
+                <tr>
+                  <td style="width: 20%;">{{ tarea.titulo }}</td>
+                  <td style="width: 40%;">{{ tarea.descripcion }}</td>
+                  <td>{{ tarea.fecha_vencimiento }}</td>
+                  <td>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <select name="estado" style="width: 120px;">
+                        {% for choice in tarea.ESTADO_CHOICES %}
+                          <option value="{{ choice.0 }}" {% if choice.0 == tarea.estado %}selected{% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                      </select>
+                      <button type="submit">Cambiar Estado</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <select name="etiqueta">
+                        {% for x in etiquetas %}
+                          <option value="{{ x.id }}">{{ x.nombre }}</option>
+                        {% endfor %}
+                      </select>
+                      <button type="submit">Cambiar Etiqueta</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-
-  <table>
-    <thead>
-
-    <tr>
-      <th>Título</th>
-      <th>Descripción</th>
-      <th>Fecha de Vencimiento</th>
-      <th>Estado</th>
-      <th>Etiqueta</th>
-    </tr>
-
-  </thead>
-  <tbody>
-    {% for tarea in tareas %}</tbody>
-    <tr>
-      <td>{{ tarea.titulo }}</td>
-      <td>{{ tarea.descripcion }}</td>
-      <td>{{ tarea.fecha_vencimiento }}</td>
-      <td>
-        <form method="POST">
-          {% csrf_token %}
-          <select name="estado">
-            {% for choice in tarea.ESTADO_CHOICES %}
-              <option value="{{ choice.0 }}" {% if choice.0 == tarea.estado %}selected{% endif %}>{{ choice.1 }}</option>
-            {% endfor %}
-          </select>
-          <button type="submit">Cambiar Estado</button>
-        </form>
-      </td>
-      <td>
-        <form method="POST">
-          {% csrf_token %}
-     
-          <select name="etiqueta">
-            {% for x in etiquetas %}
-            {{x.nombre}}
-              <option value="{{ x.id }}" >{{ x.nombre }}</option>
-            {% endfor %}
-          </select>
-          <button type="submit">Cambiar Etiqueta</button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody></tbody>
-  </table>
+  <style>
+    @media (max-width: 768px) {
+      table.table-striped tbody tr {
+        display: block;
+        margin-bottom: 20px;
+      }
+      table.table-striped tbody td {
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+      table.table-striped thead {
+        display: none;
+      }
+    }
+  </style>
 {% endblock %}

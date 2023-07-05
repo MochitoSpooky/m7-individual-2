@@ -8,7 +8,8 @@ from .forms import TareaForm
 
 @login_required
 def lista_tareas(request):
-    tareas = Tarea.objects.all()
+    usuario = request.user
+    tareas = Tarea.objects.filter(usuario=usuario)
     lista_e = Etiqueta.objects.all()
     print(tareas)
     return render(request, 'tareas/lista_tareas.html', {'tareas': tareas,'etiquetas': lista_e})
