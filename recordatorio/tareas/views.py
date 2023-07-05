@@ -84,6 +84,9 @@ def registro(request):
         username = request.POST['username']
         password = request.POST['psw']
         password_repeat = request.POST['psw-repeat']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
 
         if password == password_repeat:
             # Verificar si el usuario ya existe
@@ -92,7 +95,7 @@ def registro(request):
                 return render(request, 'tareas/registro.html', {'error_message': error_message})
             else:
                 # Crear el nuevo usuario
-                user = User.objects.create_user(username=username, password=password)
+                user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name, email=email)
                 return redirect('bienvenida')
         else:
             error_message = 'Las contraseñas no coinciden.'

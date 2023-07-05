@@ -13,7 +13,8 @@
     <div style="border: 1px solid black; padding: 20px; width: 300px; margin-right: 20px; margin-top: 20px; margin-left: 20px;">
         <h2>Perfil del Usuario</h2>
         <p style="font-weight: bold;">Información del usuario:</p>
-        <p><strong>Nombre:</strong> {{ request.user.username|capfirst }}</p>
+        <p><strong>Usuario:</strong> {{ request.user.username|capfirst }}</p>
+        <p><strong>Nombre:</strong> {{ user.first_name |capfirst}} {{ user.last_name |capfirst}}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <!-- Agrega aquí más información del perfil del usuario si es necesario -->
       </div>
