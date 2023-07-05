@@ -14,6 +14,7 @@ class Tarea(models.Model):
         ('en_progreso', 'En progreso'),
         ('completada', 'Completada'),
     ]
+   
 
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
@@ -23,4 +24,4 @@ class Tarea(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.titulo
+        return f"{self.titulo}|{self.estado}" 

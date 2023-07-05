@@ -26,7 +26,7 @@ urlpatterns = [
     path('', views.home, name='base'),
     path('login/', login_view, name='login'),
     path('logout/', CustomLogoutView.as_view(next_page='base'), name='logout'),
-    path('tareas/', views.lista_tareas, name='tareas'),  # Cambiado a 'tareas' en lugar de 'lista_tareas'
+    path('lista_tareas/', views.lista_tareas, name='lista_tareas'),  # Cambiado a 'tareas' en lugar de 'lista_tareas'
     path('bienvenida/', bienvenida, name='bienvenida'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='tareas/base.html'), name='base'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),

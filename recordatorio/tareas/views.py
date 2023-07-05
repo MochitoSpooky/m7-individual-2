@@ -1,7 +1,6 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tarea
+from .models import Tarea, Etiqueta
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.models import User
@@ -10,25 +9,19 @@ from .forms import TareaForm
 @login_required
 def lista_tareas(request):
     tareas = Tarea.objects.all()
-    return render(request, 'tareas/lista_tareas.html', {'tareas': tareas})
+    lista_e = Etiqueta.objects.all()
+    print(tareas)
+    return render(request, 'tareas/lista_tareas.html', {'tareas': tareas,'etiquetas': lista_e})
 
 @login_required
 def detalle_tarea(request, tarea_id):
     tarea = get_object_or_404(Tarea, id=tarea_id, usuario=request.user)
 
-    return render(request, 'tareas/tareas.html', {
+    return render(request, 'tareas/lista_tareas.html', {
         'tarea': tarea,
     })
 
-@login_required
-def completar_tarea(request, tarea_id):
-    tarea = get_object_or_404(Tarea, id=tarea_id, usuario=request.user)
-    tarea.estado = 'completada'
-    tarea.save()
 
-    return redirect('lista_tareas')
-
-# Agrega las vistas para crear, editar y eliminar tareas según tus necesidades
 @login_required
 def bienvenida(request):
     return render(request, 'tareas/bienvenida.html')
@@ -62,7 +55,7 @@ def agregar_tarea(request):
             tarea = form.save(commit=False)
             tarea.usuario = request.user
             tarea.save()
-            return redirect('tareas')
+            return redirect('lista_tareas')
     else:
         form = TareaForm()
     

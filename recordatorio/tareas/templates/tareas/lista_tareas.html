@@ -1,10 +1,15 @@
 {% extends 'tareas/base.html' %}
+
 {% block logo %}{% endblock %}
 
 {% block content %}
   <h1>Detalle de Tarea</h1>
 
+
+
   <table>
+    <thead>
+
     <tr>
       <th>Título</th>
       <th>Descripción</th>
@@ -12,6 +17,10 @@
       <th>Estado</th>
       <th>Etiqueta</th>
     </tr>
+
+  </thead>
+  <tbody>
+    {% for tarea in tareas %}</tbody>
     <tr>
       <td>{{ tarea.titulo }}</td>
       <td>{{ tarea.descripcion }}</td>
@@ -24,18 +33,24 @@
               <option value="{{ choice.0 }}" {% if choice.0 == tarea.estado %}selected{% endif %}>{{ choice.1 }}</option>
             {% endfor %}
           </select>
+          <button type="submit">Cambiar Estado</button>
         </form>
       </td>
       <td>
         <form method="POST">
           {% csrf_token %}
+     
           <select name="etiqueta">
-            {% for etiqueta in etiquetas %}
-              <option value="{{ etiqueta.id }}" {% if etiqueta.id == tarea.etiqueta.id %}selected{% endif %}>{{ etiqueta.nombre }}</option>
+            {% for x in etiquetas %}
+            {{x.nombre}}
+              <option value="{{ x.id }}" >{{ x.nombre }}</option>
             {% endfor %}
           </select>
+          <button type="submit">Cambiar Etiqueta</button>
         </form>
       </td>
     </tr>
+    {% endfor %}
+  </tbody></tbody>
   </table>
 {% endblock %}
