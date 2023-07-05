@@ -6,15 +6,9 @@
 {% block content %}
 <script>
     $(function() {
-      $("#id_fecha_vencimiento").datepicker({
-        dateFormat: 'dd/mm/yy',
-        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-      });
+      $("#id_fecha_vencimiento").datepicker({dateFormat: 'dd-mm-yy'});
     });
-</script>
+  </script>
 <div style="display: flex; justify-content: center;">
     <div style="border: 1px solid black; padding: 20px; width: 300px; margin-right: 20px; margin-top: 20px; margin-left: 20px;">
         <h2>Perfil del Usuario</h2>
@@ -22,8 +16,8 @@
         <p><strong>Nombre:</strong> {{ request.user.username|capfirst }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <!-- Agrega aquí más información del perfil del usuario si es necesario -->
-    </div>
-    <div style="text-align: center;">
+      </div>
+      <div style="text-align: center;">
         <h1>Detalle de Tarea</h1>
 
         <form method="post" style="width: 70%; margin: 0 auto;">
@@ -38,7 +32,7 @@
             </div>
             <div style="margin-bottom: 10px;">
                 <label for="{{ form.fecha_vencimiento.id_for_label }}">Fecha de Vencimiento:</label>
-                {{ form.fecha_vencimiento }}
+                <input type="text" id="{{ form.fecha_vencimiento.id_for_label }}" name="{{ form.fecha_vencimiento.html_name }}" class="datepicker">
             </div>
             <div style="margin-bottom: 10px;">
                 <label for="{{ form.estado.id_for_label }}">Estado:</label>
@@ -50,10 +44,17 @@
             </div>
             <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Agregar Tarea</button>
         </form>
-
-        <table style="margin: 20px auto; width: 80%;">
-            <!-- Código de la tabla de tareas aquí -->
-        </table>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+        });
+    });
+</script>
 {% endblock %}
